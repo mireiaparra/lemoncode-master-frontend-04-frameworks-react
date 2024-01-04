@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const DetailPage: React.FC = () => {
+    const { id } = useParams();
   return (
     <>
       <h2>Hello from Detail page</h2>
-      <Link to="/list">Go to list page</Link>
+        <p>Id: {id}</p>
+      <Link to="/list">Back to list page</Link>
     </>
   );
 };
