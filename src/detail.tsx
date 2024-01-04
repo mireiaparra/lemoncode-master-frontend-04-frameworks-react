@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 
 interface MemberDetailEntity {
@@ -20,6 +20,7 @@ const createDefaultMemberDetail = (): MemberDetailEntity => ({
 export const DetailPage: React.FC = () => {
     const [memberDetail, setMemberDetail] = React.useState<MemberDetailEntity>(createDefaultMemberDetail());
     const { id } = useParams();
+    const { search } = React.useContext(SearchContext);
     React.useEffect(() => {
         fetch(`https://api.github.com/users/${id}`)
         .then(response => response.json())

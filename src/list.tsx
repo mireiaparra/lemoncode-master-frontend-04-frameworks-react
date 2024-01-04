@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SearchContext } from "./searchContext";
 import { Link } from "react-router-dom";
 
 interface MemberEntity {
@@ -9,13 +10,13 @@ interface MemberEntity {
 
 export const ListPage: React.FC = () => {
     const [members, setMembers] = React.useState<MemberEntity[]>([]);
-    const [search, setSearch] = React.useState("lemoncode");
-    React.useEffect(() => {
-        fetch("https://api.github.com/orgs/lemoncode/members")
-        .then(response => response.json())
-        .then(json => setMembers(json));
-    }
-    , []);
+    const { search, setSearch } = React.useContext(SearchContext);
+    // React.useEffect(() => {
+    //     fetch("https://api.github.com/orgs/lemoncode/members")
+    //     .then(response => response.json())
+    //     .then(json => setMembers(json));
+    // }
+    // , []);
    const handleSearch = () => {
          fetch(`https://api.github.com/orgs/${search}/members`)
          .then(response => response.json())
