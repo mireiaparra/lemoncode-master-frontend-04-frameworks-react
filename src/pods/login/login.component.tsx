@@ -1,3 +1,6 @@
+import { AccountCircle } from "@mui/icons-material";
+import { Avatar, Button, TextField } from "@mui/material";
+import { deepPurple } from "@mui/material/colors";
 import React from "react";
 
 interface Props {
@@ -17,17 +20,11 @@ export const LoginComponent: React.FC<Props> = (props) => {
 
     return (
         <form onSubmit={handleNavigation}>
-            <h2>Hello from login page</h2>
           <div className="login-container">
-            <div>
-              <label>Username:</label>
-              <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)}/>
-            </div>
-            <div>
-              <label>Password:</label>
-              <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
-            </div>
-          <button type="submit">Go</button>
+              <Avatar sx={{ bgcolor: deepPurple[500] }}><AccountCircle/></Avatar>
+              <TextField label="Username" variant="outlined" value={username} onChange={e => setUsername(e.target.value)}/>
+              <TextField label="Password" variant="outlined" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+          <Button variant="contained" type="submit">Login</Button>
           </div>
         </form>
       );

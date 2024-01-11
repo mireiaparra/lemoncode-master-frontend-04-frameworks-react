@@ -3,7 +3,7 @@ import { Member } from './list.vm';
 import { Link } from 'react-router-dom';
 import { routes } from '../../router';
 import { Organization } from '../../core';
-import { Pagination } from '@mui/material';
+import { Button, Grid, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 
 interface Props {
     members: Member[];
@@ -30,33 +30,50 @@ export const ListComponent:React.FC<Props> = (props) => {
     }
 
     return (
-        <>
-            <h2>List page</h2>
-            <input type="text" value={organization} onChange={handleSearch}/>
-            <button onClick={handleSearchClick}>Search</button>
-          <div className="list-header-container">
-            <span className="list-header">Avatar</span>
-            <span className="list-header">Id</span>
-            <span className="list-header">Name</span>
-            </div>
-            <ul>
-                    {
-                        members.map(member =>
-                            <li key={member.id} className="list-user-list-container">
-                                <img src={member.avatar_url}/>
-                                <span>{member.id}</span>
-                                <span>{member.login}</span>
-                                <Link to={routes.detail(member.login)}>See detail</Link>
-                            </li>
-                        )
-                    }
-               
-            </ul>
-            <Pagination 
-            count={lastPage} 
-            page={page}
-            onChange={handlePageChange}
-            />
-            </>
+        <Grid container sx={{p:3}}>
+            <Grid item xs={8}>
+                <h2>List page</h2>
+            </Grid>
+            <Grid item sx={{mb:2}}>
+                <TextField variant="standard" label="Organization" value={organization} onChange={handleSearch}/>
+            <Button variant="contained" onClick={handleSearchClick}>Search</Button>
+            </Grid>
+          <Grid item xs={12}>
+              <TableContainer component={Paper}>
+                <Table sx={{minWidth:650}} size='small'>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell className="list-header">Avatar</TableCell>
+                            <TableCell className="list-header">Id</TableCell>
+                            <TableCell className="list-header">Name</TableCell>
+                            <TableCell className="list-header"></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                            {
+                                members.map(member =>
+                                    <TableRow key={member.id} className="list-user-list-container">
+                                        <TableCell><img src={member.avatar_url}/></TableCell>
+                                        <TableCell>{member.id}</TableCell>
+                                        <TableCell>{member.login}</TableCell>
+                                        <TableCell>
+                                            <Link to={routes.detail(member.login)}>See detail</Link>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            }
+              
+                    </TableBody>
+                </Table>
+                </TableContainer>
+          </Grid>
+            <Grid item xs={10}>
+                <Pagination
+                count={lastPage}
+                page={page}
+                onChange={handlePageChange}
+                />
+            </Grid>
+            </Grid>
       );
 }

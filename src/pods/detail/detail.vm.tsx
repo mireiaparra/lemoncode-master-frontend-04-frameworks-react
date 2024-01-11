@@ -4,6 +4,7 @@ export interface MemberDetail {
     name: string;
     company: string;
     bio: string;
+    avatar_url: string;
 }
 
 export const createInitMemberDetail = (): MemberDetail => ({
@@ -12,4 +13,5 @@ export const createInitMemberDetail = (): MemberDetail => ({
     name: "",
     company: "",
     bio: "",
+    avatar_url: "",
 });
