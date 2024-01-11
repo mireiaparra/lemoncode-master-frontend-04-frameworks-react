@@ -1,3 +1,4 @@
+import { Pagination } from '@mui/material';
 export interface MemberApi {
     login: string;
     id: number;

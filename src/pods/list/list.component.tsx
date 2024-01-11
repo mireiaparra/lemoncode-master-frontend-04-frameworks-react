@@ -3,22 +3,30 @@ import { Member } from './list.vm';
 import { Link } from 'react-router-dom';
 import { routes } from '../../router';
 import { Organization } from '../../core';
+import { Pagination } from '@mui/material';
 
 interface Props {
     members: Member[];
     organization: string;
     setOrganization: (organization: string) => void;
     search: () => void;
+    page: number;
+    setPage: (page: number) => void;
+    lastPage: number;
 }
 
 export const ListComponent:React.FC<Props> = (props) => {
-    const { members, organization, setOrganization, search } = props;
+    const { members, organization, setOrganization, search, page, setPage, lastPage } = props;
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setOrganization(event.target.value);
     }
 
     const handleSearchClick = () => {
         search();
+    }
+
+    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
     }
 
     return (
@@ -44,6 +52,11 @@ export const ListComponent:React.FC<Props> = (props) => {
                     }
                
             </ul>
+            <Pagination 
+            count={lastPage} 
+            page={page}
+            onChange={handlePageChange}
+            />
             </>
       );
 }
